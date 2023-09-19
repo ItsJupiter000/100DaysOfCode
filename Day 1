@@ -1,0 +1,37 @@
+🧩 Problem Solved #1: Leetcode 1752. Check if Array Is Sorted and Rotated 
+🔗 Problem Link: https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/
+
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        // Get the size of the input vector.
+        int n = nums.size();
+        
+        // Initialize a counter to keep track of the number of times the array is not sorted.
+        int count = 0;
+        
+        // Iterate through the elements of the array.
+        for (int i = 0; i < n; i++) {
+            // Check if the current element is greater than the next element when considering circular (rotated) indexing.
+            if (nums[i] > nums[(i + 1) % n]) {
+                count++;
+            }
+            
+            // If we've found more than one inversion (i.e., unsorted part), return false.
+            if (count > 1) {
+                return false;
+            }
+        }
+        
+        // If we haven't found more than one inversion, return true, indicating the array is sorted and rotated.
+        return true;
+    }
+};
+
+
+
+Time Complexity Analysis:
+
+Best Case: The best case occurs when the array is already sorted and rotated. In this case, the loop will iterate through all elements once and immediately return true. The time complexity is O(n) in the best case.
+Worst Case: The worst case occurs when the array is completely reversed and rotated. In this case, the loop will iterate through all elements, and count will reach a maximum of 2 before returning false. Therefore, the time complexity is O(n) in the worst case as well.
+Overall, the time complexity of this code is O(n) for both best and worst cases.
