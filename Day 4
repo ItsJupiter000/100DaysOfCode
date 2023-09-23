@@ -1,0 +1,35 @@
+//🚀 Day 4 of #100DaysOfCode Challenge 🚀
+
+//🧩 Problem Solved: Leetcode 485. Max Consecutive Ones
+//🔗 Problem Link: https://lnkd.in/dkbiwchz
+
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int n = nums.size(); // Get the size of the input vector.
+        int count = 0; // Initialize a variable to keep track of the current consecutive ones.
+        int tempCount = 0; // Initialize a temporary variable to store the maximum consecutive ones encountered so far.
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 1) { // If the current element is 1, increment the count.
+                count++;
+            } else { // If the current element is not 1 (i.e., 0), it breaks the consecutive ones sequence.
+                if (tempCount < count) { // Check if the current count is greater than the temporary count.
+                    tempCount = count; // If yes, update the temporary count to the current count.
+                }
+                count = 0; // Reset the count to 0 since the sequence is broken.
+            }
+        }
+
+        // After the loop, we need to check if the last sequence of 1's is the longest.
+        if (tempCount < count) {
+            return count; // If the last sequence is longer, return its length.
+        } else {
+            return tempCount; // Otherwise, return the maximum consecutive ones encountered.
+        }
+    }
+};
+
+
+//The time complexity of this code is O(n), where "n" is the number of elements in the input vector nums. This is because the code uses a single loop that iterates through all the elements of the array exactly once.
+//Within each iteration of the loop, there are constant-time operations involving comparisons and updates, which do not depend on the size of the input. Therefore, the overall time complexity is linear in the size of the input vector, making it O(n).
