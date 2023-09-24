@@ -1,0 +1,21 @@
+Day 5 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: 136. Single Number
+🔗 Problem Link: https://lnkd.in/d8D76Gi3
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int i=0;
+        while (i<nums.size()-1) { // Iterate until the second-to-last element
+            if (nums[i] != nums[i + 1]) {
+                return nums[i];
+            }
+            i += 2;
+        }
+        return nums[nums.size() - 1]; // If the single number is at the end
+    }
+};
+
+The time complexity of the modified code is O(n log n) due to the sorting operation, where "n" is the number of elements in the input array nums.
