@@ -1,0 +1,32 @@
+🚀 Day 6 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: 189. Rotate Array (Medium) [2 approaches👇🏻]
+🔗 Problem Link: https://leetcode.com/problems/rotate-array/description/
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> ans(n);
+        
+        for(int i = 0; i < n; i++){
+            ans[(i + k) % n] = nums[i]; 
+        }
+        
+        nums = ans;
+    }
+};
+
+-------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k %= n; // In case k is larger than n, we take the modulo to avoid unnecessary rotations.
+        
+        reverse(nums.begin(), nums.end() - k); // Reverse the first part of the array (0 to n-k-1).
+        reverse(nums.end() - k, nums.end());   // Reverse the second part of the array (n-k to n-1).
+        reverse(nums.begin(), nums.end());      // Reverse the entire array to get the final result.
+    }
+};
