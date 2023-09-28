@@ -1,0 +1,20 @@
+🚀 Day 8 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 215. Kth Largest Element in an Array (Medium)
+🔗 Problem Link: https://lnkd.in/dJebJ3rD
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        // Get the number of elements in the vector
+        int n = nums.size();
+
+        // Sort the vector in ascending order (e.g., using quicksort or mergesort)
+        sort(nums.begin(), nums.end());
+
+        // Return the kth largest element, which is at the (n - k)th position in the sorted array
+        return nums[n - k];
+    }
+};
+
+The dominant factor in this function is the sorting step using sort. The average time complexity of sorting an array with N elements using a comparison-based sorting algorithm like quicksort or mergesort is O(N * log(N)).
