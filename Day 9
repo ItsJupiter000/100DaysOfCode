@@ -1,0 +1,22 @@
+🚀 Day 9 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 70. Climbing Stairs
+🔗 Problem Link: https://lnkd.in/dxb-XWRu
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        int first = 1, second = 0; // Initialize first and second to represent the number of ways to reach the first and second steps.
+        int temp = 0; // Initialize a temporary variable to calculate the number of ways to reach the current step.
+
+        for (int i = 0; i < n; i++) {
+            temp = first + second; // Calculate the number of ways to reach the current step by adding the ways from the previous two steps.
+            second = first; // Update the second to be the number of ways to reach the previous step.
+            first = temp; // Update the first to be the number of ways to reach the current step.
+        }
+
+        return temp; // Return the number of ways to reach the nth step, which is stored in temp.
+    }
+};
+
+The loop iterates n times, and for each iteration, there are constant time operations (additions and assignments). Therefore, the time complexity of this function is O(n), linear in the value of n.
