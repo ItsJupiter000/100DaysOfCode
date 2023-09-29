@@ -1,0 +1,39 @@
+🚀 Day 10 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 125. Valid Palindrome
+🔗 Problem Link: https://lnkd.in/dTwYT2s8
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cctype>
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        // Check if the string is empty, which is considered a palindrome
+        if (s.empty()) return true;
+
+        // Remove non-alphanumeric characters from the string
+        s.erase(std::remove_if(s.begin(), s.end(), [](char c) {
+            return !std::isalnum(c);
+        }), s.end());
+
+        int i = 0; // Pointer starting from the beginning of the string
+        int j = s.length() - 1; // Pointer starting from the end of the string
+
+        // Compare characters at corresponding positions from both ends
+        while (i <= j) {
+            // Check if the characters at positions i and j are not equal after converting to lowercase
+            if (std::tolower(s[i]) != std::tolower(s[j])) {
+                return false; // If not equal, it's not a palindrome
+            }
+            i++; // Move the pointer from the beginning towards the end
+            j--; // Move the pointer from the end towards the beginning
+        }
+
+        return true; // If the loop completes, the string is a palindrome
+    }
+};
+
+The time complexity of this function is O(N), where N is the length of the input string s. The function iterates through the string once, performing constant-time operations for each character. The use of std::isalnum and std::tolower also involves constant-time operations per character.
