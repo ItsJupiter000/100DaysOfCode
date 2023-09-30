@@ -1,0 +1,34 @@
+🚀 Day 11 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 20. Valid Parentheses
+🔗 Problem Link: https://lnkd.in/dmfqpz84
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> temp; // Stack to store opening parentheses, braces, and brackets
+
+        for (int i = 0; i < s.length(); i++) {
+            if (temp.empty()) {
+                temp.push(s[i]); // If the stack is empty, push the current character onto the stack
+            } else if (s[i] == ')') {
+                if (temp.top() != '(') return false; // Check if the top of the stack is the corresponding opening parenthesis
+                else temp.pop(); // If yes, pop the opening parenthesis from the stack
+            } else if (s[i] == '}') {
+                if (temp.top() != '{') return false; // Check if the top of the stack is the corresponding opening brace
+                else temp.pop(); // If yes, pop the opening brace from the stack
+            } else if (s[i] == ']') {
+                if (temp.top() != '[') return false; // Check if the top of the stack is the corresponding opening bracket
+                else temp.pop(); // If yes, pop the opening bracket from the stack
+            } else {
+                temp.push(s[i]); // If the current character is an opening parenthesis, brace, or bracket, push it onto the stack
+            }
+        }
+
+        // Check if the stack is empty, which means all opening characters had corresponding closing characters
+        if (temp.empty()) return true;
+        else return false;
+    }
+};
+
+The time complexity of this function is O(N), where N is the length of the input string s. The function iterates through the string once, and each operation within the loop takes constant time. The stack operations (push and pop) are also constant time on average.
