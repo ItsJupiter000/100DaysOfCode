@@ -1,0 +1,32 @@
+🚀 Day 11 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 20. Valid Parentheses
+🔗 Problem Link: https://lnkd.in/dmfqpz84
+
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string defangIPaddr(string address) {
+        // Create an empty string to store the result
+        string ans = "";
+
+        // Loop through each character in the input string
+        for (int i = 0; i < address.size(); i++) {
+            // Check if the current character is a dot '.'
+            if (address[i] == '.') {
+                // If it is a dot, append "[.]" to the result string
+                ans = ans + "[.]";
+            } else {
+                // If it is not a dot, append the character as it is to the result string
+                ans = ans + address[i];
+            }
+        }
+
+        // Return the modified string with dots replaced by "[.]"
+        return ans;
+    }
+};
+
+Time Complexity: The time complexity of this function is O(N), where N is the length of the input string address. This is because the function iterates through each character of the string once.
