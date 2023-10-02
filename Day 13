@@ -1,0 +1,38 @@
+🚀 Day 13 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 13. Roman to Integer
+🔗 Problem Link: https://lnkd.in/d8gHZsQr
+
+class Solution {
+public:
+    int romanToInt(string s) {
+        // Create a map to store the integer values corresponding to each Roman numeral character
+        unordered_map<char, int> m;     
+        m['I'] = 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
+        
+        // Initialize the result variable to store the final integer value
+        int ans = 0;       
+        // Iterate through the characters of the input Roman numeral string
+        for(int i = 0; i < s.size(); i++){
+            // Check if the current numeral is smaller than the next one
+            if(m[s[i]] < m[s[i+1]]){
+                // If true, subtract the current numeral's value from the result
+                ans -= m[s[i]];
+            }
+            else{
+                // If false, add the current numeral's value to the result
+                ans += m[s[i]];
+            }
+        }
+        // Return the final result
+        return ans;      
+    }
+};
+
+The loop iterates through the characters of the input string once, so the time complexity is O(n), where n is the length of the input string. The unordered map access is constant time, so it doesn't affect the overall time complexity in a significant way. Therefore, the overall time complexity is O(n).
