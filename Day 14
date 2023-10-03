@@ -1,0 +1,24 @@
+🚀 Day 14 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 268. Missing Number
+🔗 Problem Link: https://lnkd.in/dkfkCBJB
+
+#include<bits/stdc++.h> 
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size(); // Get the size of the vector, representing the total number of elements
+        int actual_sum = 0; // Initialize a variable to store the actual sum of elements in the vector
+        int expected_sum = (n*(n+1))/2; // Calculate the expected sum of elements if no number is missing
+
+        // Calculate the actual sum by iterating through the elements in the vector
+        for(int i=0; i<n; i++){
+            actual_sum += nums[i];
+        }
+
+        int x = (expected_sum - actual_sum); // Calculate the missing number by subtracting actual sum from expected sum
+        return x; // Return the missing number
+    }
+};
+
+The time complexity of this code is O(n), where n is the size of the input vector. This is because there is a single loop that iterates through all elements of the vector. The other operations such as addition, subtraction, and assignment are constant time operations.
