@@ -1,0 +1,43 @@
+🚀 Day 15 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: GFG Find triplets with zero sum
+🔗 Problem Link: https://lnkd.in/ddzrwSwv
+
+class Solution {
+public:
+    // Function to find triplets with zero sum.
+    bool findTriplets(int arr[], int n) { 
+        // Sort the array in ascending order to simplify the process of finding triplets.
+        sort(arr, arr + n);
+
+        // Iterate through each element of the array.
+        for (int i = 0; i < n; i++) {
+            int left = i + 1;   // Initialize the left pointer to the next element after arr[i].
+            int right = n - 1;  // Initialize the right pointer to the last element of the array.
+
+            // Continue the loop until the left and right pointers meet.
+            while (left < right) {
+                int sum = arr[i] + arr[left] + arr[right];  // Calculate the sum of the triplet.
+
+                // If the sum is zero, we have found a triplet with zero sum.
+                if (sum == 0) {
+                    return true;
+                } 
+                // If the sum is greater than zero, move the right pointer to the left.
+                else if (sum > 0) {
+                    right--;
+                } 
+                // If the sum is less than zero, move the left pointer to the right.
+                else {
+                    left++;
+                }
+            }
+        }
+
+        // If no triplet with zero sum is found, return false.
+        return false;
+    }
+};
+
+
+The time complexity of this code is O(n^2) due to the nested loop structure, where 'n' is the size of the input array. The sorting step contributes O(n log n) to the time complexity.
