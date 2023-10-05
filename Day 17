@@ -1,0 +1,16 @@
+🚀 Day 16 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: GCD or HCF
+🔗 Problem Link: https://www.codingninjas.com/studio/problems/hcf-and-lcm_840448?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=1
+
+int calcGCD(int n, int m){
+    // Write your code here.
+    if(m==0){
+        return n;
+    }
+    else{
+        return calcGCD(m,n%m);
+    }
+}
+
+The time complexity of this code is O(log min(n, m)). It's based on the fact that this function uses Euclid's algorithm for finding the greatest common divisor (GCD) of two numbers. In each recursive call, the size of the problem is reduced by at least half, which leads to a logarithmic time complexity.
