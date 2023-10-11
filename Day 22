@@ -1,0 +1,27 @@
+🚀 Day 22 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Insertion Sort
+🔗 Problem Link: https://lnkd.in/dhTSHe_g
+
+#include <bits/stdc++.h>
+
+void insertionSort(int n, std::vector<int> &arr) {
+    // Outer loop: iterate through each element starting from the second
+    for (int i = 1; i < n; i++) {
+        int j = i; // Initialize a variable to keep track of the current position
+
+        // Inner loop: compare and swap elements until the correct position is found
+        while (j > 0 && arr[j] < arr[j - 1]) {
+            // Swap the current element with the previous one
+            int temp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = temp;
+
+            // Move to the previous position to continue comparing and swapping
+            j--;
+        }
+    }
+}
+
+Time Complexity: O(n^2)
+In the worst case, each element may need to be compared and swapped with every previous element, resulting in a quadratic time complexity.
