@@ -1,0 +1,73 @@
+🚀 Day 23 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Merge Sort
+🔗 Problem Link: https://lnkd.in/dV2YHGmZ
+
+// Function to merge two halves of the array
+void merge(int arr[], int l, int mid, int r) {
+    // Calculate sizes of two temporary arrays
+    int n1 = mid - l + 1;
+    int n2 = r - mid;
+
+    // Create temporary arrays L[] and R[]
+    int L[n1], R[n2];
+
+    // Copy data to temporary arrays L[] and R[]
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    // Merge the two sorted arrays back into the original array
+    int i = 0;  // Initial index of the first subarray
+    int j = 0;  // Initial index of the second subarray
+    int k = l;  // Initial index of the merged subarray
+
+    // Compare elements from L[] and R[] and merge them into arr[]
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy the remaining elements of L[], if there are any
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // Copy the remaining elements of R[], if there are any
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// Function to perform merge sort on the array
+void mergeSort(int arr[], int l, int r) {
+    // Base case: If the array has one or zero elements, it's already sorted
+    if (l >= r) return;
+
+    // Calculate the middle index of the array
+    int mid = (l + r) / 2;
+
+    // Recursively sort the two halves
+    mergeSort(arr, l, mid);
+    mergeSort(arr, mid + 1, r);
+
+    // Merge the sorted halves
+    merge(arr, l, mid, r);
+}
+
+// Time complexity analysis:
+// T(n) = 2T(n/2) + O(n)
+// The divide-and-conquer recurrence relation for merge sort
+// Each recursive call takes O(n) time for merging, and there are log(n) levels
+// Time complexity: O(n log n)
