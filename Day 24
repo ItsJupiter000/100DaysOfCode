@@ -1,0 +1,53 @@
+🚀 Day 24 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Quick Sort
+🔗 Problem Link: https://lnkd.in/egxcEyt6
+
+// Function to partition the array and return the index of the pivot element
+int partitionArray(int input[], int start, int end) {
+    // Choose the pivot element (in this case, the first element)
+    int pvt = input[start];
+    
+    // Initialize two pointers i and j
+    int i = start;
+    int j = end;
+
+    // Loop until pointers meet
+    while (i < j) {
+        // Find an element greater than the pivot from the left side
+        while (input[i] <= pvt && i <= end - 1) {
+            i++;
+        }
+
+        // Find an element less than or equal to the pivot from the right side
+        while (input[j] > pvt && j >= start + 1) {
+            j--;
+        }
+
+        // Swap elements if i is less than j
+        if (i < j) {
+            swap(input[i], input[j]);
+        }
+    }
+
+    // Swap the pivot with the element at index j
+    swap(input[start], input[j]);
+
+    // Return the index of the pivot element
+    return j;
+}
+
+// Function to perform quicksort
+void quickSort(int input[], int start, int end) {
+    // Check if there are elements to sort
+    if (start < end) {
+        // Get the partition index
+        int pIndex = partitionArray(input, start, end);
+
+        // Recursively sort the sub-arrays on both sides of the pivot
+        quickSort(input, start, pIndex - 1);
+        quickSort(input, pIndex + 1, end);
+    }
+}
+
+// Time complexity of quicksort is O(n log n) on average, but it can degrade to O(n^2) in the worst case.
