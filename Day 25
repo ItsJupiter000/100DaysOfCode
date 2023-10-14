@@ -1,0 +1,40 @@
+🚀 Day 25 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Recursive Insertion sort
+🔗 Problem Link: https://lnkd.in/ddTwkjin
+
+void insertionSort(int arr[], int n)
+{
+    // Initialize the variable i to 1
+    int i = 1;
+
+    // Base case: if i is equal to n, return from the function
+    if (i == n) return;
+
+    // Outer loop for iterating through the array
+    for (int i = 1; i < n; i++)
+    {
+        // Set j to the current value of i
+        int j = i;
+
+        // Inner loop for shifting elements to the correct position
+        while (j > 0 && arr[j] < arr[j - 1])
+        {
+            // Swap arr[j] and arr[j-1]
+            int temp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = temp;
+
+            // Move to the previous element
+            j--;
+        }
+    }
+
+    // Decrease the size of the array by 1 for the recursive call
+    n = n - 1;
+
+    // Recursive call to insertionSort with the updated size
+    insertionSort(arr, n);
+}
+
+ The time complexity of this recursive insertion sort is O(n^2) in the worst case, where n is the number of elements in the array. This is because, in the worst case, each element might need to be compared and swapped with every other element in the array.
