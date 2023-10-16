@@ -1,0 +1,37 @@
+🚀 Day 27 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Implement Lower Bound
+🔗 Problem Link: https://lnkd.in/dkYYYbqi
+
+int lowerBound(vector<int> arr, int n, int x) {
+    // Initialize low, high, and mid for binary search
+    int low = 0;
+    int high = n - 1;
+    int mid = low + (high - low) / 2;
+
+    // Binary search loop
+    while (low <= high) {
+        // Check if x is equal to the middle element
+        if (x == arr[mid]) {
+            // Move to the left to find the first occurrence of x
+            while (arr[mid] == arr[mid - 1]) {
+                mid--;
+            }
+            return mid;
+        } else if (x < arr[mid]) {
+            // If x is smaller, search in the left half
+            high = mid - 1;
+        } else {
+            // If x is greater, search in the right half
+            low = mid + 1;
+        }
+
+        // Update mid for the next iteration
+        mid = low + (high - low) / 2;
+    }
+
+    // If x is not found, return n (size of the array)
+    return n;
+}
+
+The time complexity of this algorithm is O(log n) as it performs binary search on a sorted array.
