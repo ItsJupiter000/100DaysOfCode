@@ -1,0 +1,42 @@
+🚀 Day 30 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Ceil The Floor
+🔗 Problem Link: https://lnkd.in/eie_BDUr
+
+#include<bits/stdc++.h>
+
+// Function to find floor and ceil of x in a sorted array a
+pair<int, int> getFloorAndCeil(vector<int> &a, int n, int x) {
+    // Initialize low, high, floor, and ceil for binary search
+    int low = 0;
+    int high = n - 1;
+    int floor = -1; // Initialize floor to an invalid value
+    int ceil = -1;  // Initialize ceil to an invalid value
+
+    // Binary search loop
+    while (low <= high) {
+        // Calculate mid index
+        int mid = low + (high - low) / 2;
+
+        // Check if x is equal to the middle element
+        if (x == a[mid]) {
+            // If x is found, set floor and ceil to the value of the element
+            floor = a[mid];
+            ceil = a[mid];
+            break; // Break out of the loop
+        } else if (x > a[mid]) {
+            // If x is greater, update floor and search in the right half
+            floor = a[mid];
+            low = mid + 1;
+        } else {
+            // If x is smaller, update ceil and search in the left half
+            ceil = a[mid];
+            high = mid - 1;
+        }
+    }
+
+    // At this point, floor and ceil will be the values of elements that are just smaller and larger than x
+    return {floor, ceil};
+}
+
+Time Complexity: The time complexity of this algorithm is O(log n) as it performs binary search on a sorted array.
