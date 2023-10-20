@@ -1,0 +1,58 @@
+🚀 Day 31 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Count nodes of linked list
+🔗 Problem Link: https://lnkd.in/dJzDRkmR
+
+// Node class definition
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    // Default constructor
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+
+    // Constructor with data parameter
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+
+    // Constructor with data and next node parameters
+    Node(int data, Node *next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+
+// Function to calculate the length of a linked list
+int length(Node *head)
+{
+    // Initialize count to 0
+    int count = 0;
+
+    // Start from the head of the linked list
+    Node *current = head;
+
+    // Traverse the linked list
+    while (current != NULL)
+    {
+        // Increment count for each node
+        count++;
+        // Move to the next node
+        current = current->next;
+    }
+
+    // Return the total count of nodes in the linked list
+    return count;
+}
+
+
+Time Complexity: The time complexity of this function is O(n), where n is the number of nodes in the linked list. This is because the function traverses each node exactly once.
