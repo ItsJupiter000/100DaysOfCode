@@ -1,0 +1,47 @@
+🚀 Day 32 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Search in a Linked List
+🔗 Problem Link: https://lnkd.in/dwP3E89S
+
+
+    //Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+            int data;
+            Node *next;
+            Node()
+            {
+                this->data = 0;
+                next = NULL;
+            }
+            Node(int data)
+            {
+                this->data = data;
+                this->next = NULL;
+            }
+            Node(int data, Node* next)
+            {
+                this->data = data;
+                this->next = next;
+            }
+        };
+
+
+
+
+int length(Node *head)
+{
+	//Write your code here
+    int count = 0;
+    Node* current = head;
+    while(current->data != NULL){
+        count++ ;
+        current = current->next;
+    }
+    return count;
+}
+
+
+Time Complexity: The time complexity of this code is O(n), where n is the number of nodes in the linked list. This is because the algorithm iterates through each node in the list exactly once.
