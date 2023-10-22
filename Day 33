@@ -1,0 +1,29 @@
+🚀 Day 33 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Insert at end of Doubly Linked List
+🔗 Problem Link: https://lnkd.in/dQdbji7B
+
+Node* insertAtTail(Node* head, int k) {
+    // Create a new node with data k
+    Node* node1 = new Node(k);
+
+    // If the linked list is empty, make the new node the head and return
+    if (head == NULL) {
+        head = node1;
+        return head;
+    }
+
+    // Traverse the linked list to find the last node
+    Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    // Link the new node to the last node
+    temp->next = node1;
+    node1->prev = temp;
+
+    return head;
+}
+
+//The time complexity of this code is O(n), where n is the number of nodes in the linked list. This is because in the worst case, it needs to traverse the entire linked list to find the last node before inserting the new node.
