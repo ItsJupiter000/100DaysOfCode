@@ -1,0 +1,31 @@
+🚀 Day 34 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Reverse A Doubly Linked List
+🔗 Problem Link: https://lnkd.in/dfSJEQ26
+
+Node* reverseDLL(Node* head)
+{   
+    // Check if the list is empty or has only one node, in which case it's already reversed
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+
+    // Initialize pointers for the reversal process
+    Node* prev = NULL;  // Previous node
+    Node* curr = head;  // Current node being processed
+    Node* next = NULL;  // Next node in the original list
+
+    // Traverse the list and reverse the links between nodes
+    while(curr != NULL){
+        next = curr->next;   // Save the next node in the original list
+        curr->next = prev;   // Reverse the link to the previous node
+        curr->prev = next;   // Update the previous pointer to point to the next node in the original list
+        prev = curr;         // Move one step forward in the reversed list
+        curr = next;         // Move one step forward in the original list
+    }
+
+    // The 'prev' pointer now points to the new head of the reversed list
+    return prev;  
+}
+
+//The time complexity of this code is O(n), where n is the number of nodes in the doubly linked list. This is because it needs to traverse the entire list once to reverse the links between nodes.
