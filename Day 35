@@ -1,0 +1,36 @@
+🚀 Day 35 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Delete Last Node of a Doubly Linked List
+🔗 Problem Link: https://lnkd.in/das-cv8a
+
+Node * deleteLastNode(Node *head) {
+    // Check if the list is empty
+    if (head == NULL) {
+        return NULL;
+    }
+
+    // Initialize a pointer to traverse the list
+    Node *current = head;
+
+    // Traverse the list to reach the last node
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    // Check if there is more than one node in the list
+    if (current->prev != NULL) {
+        // Update the next pointer of the second-to-last node to NULL
+        current->prev->next = NULL;
+    } else {
+        // If there is only one node in the list, set head to NULL
+        head = NULL;
+    }
+
+    // Free the memory of the last node
+    free(current);
+
+    // Return the updated head of the list
+    return head;
+}
+
+//The time complexity of this function is O(n), where n is the number of nodes in the doubly linked list. This is because, in the worst case, the function needs to traverse the entire list to reach the last node. The operations within the loop and the deletion of the last node are constant time.
