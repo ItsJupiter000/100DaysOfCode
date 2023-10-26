@@ -1,0 +1,39 @@
+🚀 Day 37 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Remove duplicate element from sorted Linked List
+🔗 Problem Link: https://lnkd.in/dxtnTmjS
+
+// Function to remove duplicates from a sorted linked list.
+Node *removeDuplicates(Node *head)
+{
+    // Check if the list is empty or has only one element.
+    if (head == NULL || head->next == NULL) {
+        // If so, no duplicates to remove, return the original list.
+        return head;
+    }
+
+    // Initialize a temporary pointer to traverse the list.
+    Node *temp = head;
+
+    // Traverse the list until the second-to-last node.
+    while (temp->next != NULL) {
+        // Check if the current node has the same data as the next node.
+        if (temp->data == temp->next->data) {
+            // If a duplicate is found, store the duplicate node.
+            Node *duplicate = temp->next;
+            // Adjust the pointers to skip the duplicate node.
+            temp->next = temp->next->next;
+            // Free the memory of the duplicate node.
+            delete duplicate;
+        } else {
+            // If no duplicate is found, move to the next node.
+            temp = temp->next;
+        }
+    }
+
+    // Return the head of the modified linked list with duplicates removed.
+    return head;
+}
+
+//Time Complexity:
+//The time complexity of this algorithm is O(n), where n is the number of nodes in the linked list. The loop iterates through each node once, and constant time operations are performed within the loop.
