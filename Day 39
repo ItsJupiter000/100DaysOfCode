@@ -1,0 +1,48 @@
+🚀 Day 39 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Remove duplicate element from unsorted Linked List
+🔗 Problem Link: https://lnkd.in/dDw33B4Q
+
+class Solution
+{
+public:
+    // Function to remove duplicates from unsorted linked list.
+    Node *removeDuplicates(Node *head)
+    {
+        // Set to store unique values encountered
+        unordered_set<int> s;
+
+        // Pointers to traverse the linked list
+        struct Node *curr = head;
+        struct Node *prev = NULL;
+
+        // Traverse the linked list
+        while (curr != NULL)
+        {
+            // Check if the current data is already in the set (duplicate)
+            if (s.find(curr->data) != s.end())
+            {
+                // If duplicate, update the 'next' pointer of the previous node
+                // to skip the current node, and delete the current node
+                prev->next = curr->next;
+                delete (curr);
+            }
+            else
+            {
+                // If not a duplicate, add the current data to the set
+                s.insert(curr->data);
+                // Update the 'prev' pointer to the current node
+                prev = curr;
+            }
+            
+            // Move to the next node in the linked list
+            curr = curr->next;
+        }
+        
+        // Return the head of the modified linked list
+        return head;
+    }
+    
+};
+
+//Time Complexity: The time complexity of this algorithm is O(n), where n is the number of nodes in the linked list. This is because each node is visited once, and set operations are generally O(1) on average.
