@@ -1,0 +1,47 @@
+🚀 Day 38 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 142. Linked List Cycle II
+🔗 Problem Link: https://leetcode.com/problems/linked-list-cycle-ii/description/
+
+class Solution {
+public:
+    ListNode *floyedCycleDetection(ListNode* head) {
+        if (head == NULL) return NULL; // Check if the list is empty
+        ListNode *slow = head;
+        ListNode *fast = head;
+        while (slow != NULL && fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+            if (fast != NULL) {
+                fast = fast->next; // Move the fast pointer twice as fast as the slow pointer
+            }
+            if (slow == fast) {
+                return slow; // Return the meeting point if a cycle is detected
+            }
+        }
+        return NULL; // Return NULL if no cycle is detected
+    }
+
+    ListNode *detectCycle(ListNode *head) {
+        ListNode *temp = floyedCycleDetection(head); // Detect cycle using Floyd's algorithm
+        if (temp == NULL) {
+            return NULL; // If no cycle, return NULL
+        }
+
+        ListNode *ptr1 = head; // Start a pointer from the head
+        ListNode *ptr2 = temp; // Start another pointer from the meeting point of the cycle
+
+        while (ptr1 != ptr2) {
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
+        }
+
+        return ptr1; // Return the starting point of the loop
+    }
+};
+
+//Time Complexity:
+
+The Floyd's cycle detection algorithm has a time complexity of O(n), where n is the number of nodes in the linked list.
+The additional loop to find the starting point also has a time complexity of O(n).
+Therefore, the overall time complexity is O(n).
