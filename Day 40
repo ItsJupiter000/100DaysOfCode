@@ -1,0 +1,40 @@
+🚀 Day 40 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 21. Merge Two Sorted Lists
+🔗 Problem Link: https://lnkd.in/dfyhdzDz
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    // Function to merge two sorted linked lists
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        // Base case: If either list is empty, return the other list
+        if(list1 == NULL) return list2;
+        if(list2 == NULL) return list1;
+
+        // Compare the values of the current nodes in the two lists
+        if((list1 -> val) <= list2 -> val){
+            // If the value in list1 is smaller or equal, merge the rest of list1 and list2
+            list1 -> next = mergeTwoLists(list1 -> next, list2);
+            // Return the merged list with list1 as the new head
+            return list1;
+        }
+        else{
+            // If the value in list2 is smaller, merge the rest of list1 and list2
+            list2 -> next = mergeTwoLists(list1,list2 -> next);
+            // Return the merged list with list2 as the new head
+            return list2;
+        }
+    }
+};
+
+//Time Complexity: The time complexity of this algorithm is O(m + n), where m and n are the lengths of the input lists. This is because in each recursive call, we either reduce the size of list1 by one or reduce the size of list2 by one until one of them becomes empty.
