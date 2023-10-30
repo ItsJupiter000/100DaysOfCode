@@ -1,0 +1,44 @@
+🚀 Day 41 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 876. Middle of the Linked List
+🔗 Problem Link: https://lnkd.in/dXnYvTri
+
+class Solution {
+public:
+    // Helper function to get the length of the linked list
+    int getLength(ListNode* head) {
+        int count = 0;
+        // Traverse the linked list and count the nodes
+        while (head != NULL) {
+            count++;
+            head = head->next;
+        }
+        return count;
+    }
+
+    // Function to find the middle node of the linked list
+    ListNode* middleNode(ListNode* head) {
+        // Get the length of the linked list
+        int n = getLength(head), i;
+
+        // Calculate the middle index based on the length
+        if (n % 2 == 0)
+            i = n / 2 + 1;
+        else
+            i = (n + 1) / 2;
+
+        int val = 1;
+        ListNode* temp = head;
+
+        // Traverse the linked list to find the middle node
+        while (val < i) {
+            temp = temp->next;
+            val++;
+        }
+
+        // Return the middle node
+        return temp;
+    }
+};
+
+//Time complexity: O(n), where n is the length of the linked list. The function traverses the list once to calculate the length and then traverses it again to find the middle node.
