@@ -1,0 +1,49 @@
+🚀 Day 42 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Sort Linked List of 0s, 1s and 2s
+🔗 Problem Link: https://lnkd.in/dtNjQp-F
+
+Node* sortList(Node *head){
+    // Create an array to count occurrences of 0s, 1s, and 2s
+    int count[3] = {0, 0, 0};
+    // Initialize a temporary pointer to traverse the linked list
+    Node *temp = head; 
+
+    // Count the occurrences of 0s, 1s, and 2s in the linked list
+    while (temp != NULL) 
+    { 
+        count[temp->data] += 1; 
+        temp = temp->next; 
+    }  
+
+    // Reset variables for traversal and counting
+    int i = 0; 
+    temp = head; 
+
+    // Update the linked list with sorted values
+    while (temp != NULL) 
+    { 
+        // If there are no more occurrences of the current value, move to the next one
+        if (count[i] == 0) 
+            i++; 
+        else
+        { 
+            // Update the data of the current node with the sorted value
+            temp->data = i; 
+            // Decrease the count of the current value
+            count[i]--; 
+            // Move to the next node in the linked list
+            temp = temp->next; 
+        } 
+    } 
+
+    // Return the head of the sorted list
+    return head;
+}
+
+//Time Complexity Explanation:
+
+The first loop traverses the linked list to count occurrences, which takes O(n) time, where n is the number of nodes in the list.
+The second loop also takes O(n) time as it traverses the linked list to update the data.
+Therefore, the overall time complexity is O(n).
+This code efficiently sorts a linked list containing only 0s, 1s, and 2s in O(n) time.
