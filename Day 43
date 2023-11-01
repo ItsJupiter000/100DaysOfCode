@@ -1,0 +1,58 @@
+🚀 Day 43 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 234. Palindrome Linked List
+🔗 Problem Link: https://lnkd.in/dHrZSvJb
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        // Check if the linked list is empty or has only one element, it's a palindrome
+        if (head->next == nullptr) return true;
+
+        // Initialize pointers for slow and fast traversal, and a pointer to reverse the first half
+        ListNode *fast = head;
+        ListNode *slow = head;
+        ListNode *prev = NULL;
+
+        // Move fast and reverse the first half of the linked list
+        while (fast && fast->next != NULL) {
+            head = head->next;       // Move slow pointer
+            fast = fast->next->next; // Move fast pointer
+            slow->next = prev;        // Reverse the first half
+            prev = slow;              // Move prev pointer
+            slow = head;              // Move slow pointer
+        }
+
+        // Adjust the head pointer if the list has odd length
+        if (fast != NULL) {
+            head = head->next;
+        } 
+
+        // Compare the reversed first half with the second half
+        while (head != nullptr) {
+            if (head->val != prev->val) return false;
+            head = head->next;
+            prev = prev->next;
+        }
+
+        // The linked list is a palindrome
+        return true;
+    }
+};
+
+//Time Complexity Explanation:
+
+The first while loop, where we move the fast pointer and reverse the first half, takes O(n/2) time, where n is the number of nodes in the list.
+The second while loop, where we compare the reversed first half with the second half, also takes O(n/2) time.
+Therefore, the overall time complexity is O(n), where n is the number of nodes in the linked list.
