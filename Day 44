@@ -1,0 +1,36 @@
+🚀 Day 44 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Occurence of an integer in a Linked List
+🔗 Problem Link: https://lnkd.in/drRmqKD6
+
+class Solution
+{
+public:
+    int count(struct node* head, int search_for)
+    {
+        // Initialize a temporary pointer to the head of the linked list
+        node *temp = head;
+
+        // Initialize a counter to keep track of occurrences of the search value
+        int count = 0;
+
+        // Traverse the linked list until the end is reached (temp becomes NULL)
+        while(temp != NULL)
+        {
+            // Check if the data at the current node is equal to the search value
+            if(temp->data == search_for)
+            {
+                // If it is, increment the counter
+                count++;
+            }
+
+            // Move to the next node in the linked list
+            temp = temp->next;
+        }
+
+        // Return the final count of occurrences of the search value
+        return count;
+    }
+};
+
+//Time Complexity: O(n), where n is the number of nodes in the linked list. The algorithm traverses the entire linked list once.
