@@ -1,0 +1,39 @@
+🚀 Day 45 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Move Last Element to Front of a Linked List
+🔗 Problem Link: https://lnkd.in/gyJwzSmb
+
+class Solution {
+public:
+    ListNode *moveToFront(ListNode *head) {
+        // Initialize pointers p and q to traverse the linked list
+        ListNode* p = head;
+        ListNode* q = NULL;
+
+        // Traverse the linked list until the last node is reached
+        while (p->next != NULL) {
+            // Update q to point to the current node (before moving to the next)
+            q = p;
+            // Move to the next node in the linked list
+            p = p->next;
+        }
+
+        // Check if q is not NULL (i.e., if there is more than one node in the list)
+        if (q != NULL)
+            // If q is not NULL, set the next of q to NULL, effectively removing the last node
+            q->next = NULL;
+        else
+            // If q is NULL, it means there is only one node in the list, so return the head unchanged
+            return (head);
+
+        // Move the last node to the front of the linked list
+        p->next = head;
+        // Update the head to point to the new front node
+        head = p;
+
+        // Return the modified head of the linked list
+        return (head);
+    }
+};
+
+//Time Complexity : O(n), where n is the number of nodes in the linked list. The algorithm traverses the entire linked list once.
