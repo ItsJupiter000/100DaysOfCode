@@ -1,0 +1,45 @@
+🚀 Day 46 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Move all zeros to the front of the linked list
+🔗 Problem Link: https://lnkd.in/dMupzACT
+
+// Move Zeros to the front of the list
+void moveZeroes(struct Node **head)
+{
+    // Create two dummy nodes to represent the lists of zeros and non-zeros
+    Node* zero = new Node(0);
+    Node* n1 = zero;  // Pointer to the end of the list of zeros
+
+    Node* nonzero = new Node(0);
+    Node* n2 = nonzero;  // Pointer to the end of the list of non-zeros
+
+    // Pointer to traverse the original linked list
+    Node* ptr = *head;
+
+    // Traverse the original linked list
+    while (ptr) {
+        // If the current node's data is 0, add it to the list of zeros
+        if (ptr->data == 0) {
+            n1->next = ptr;
+            n1 = n1->next;
+        } else {
+            // If the current node's data is non-zero, add it to the list of non-zeros
+            n2->next = ptr;
+            n2 = n2->next;
+        }
+        
+        // Move to the next node in the original linked list
+        ptr = ptr->next;
+    }
+
+    // Set the next of the last non-zero node to NULL
+    n2->next = NULL;
+
+    // Connect the end of the list of zeros to the beginning of the list of non-zeros
+    n1->next = nonzero->next;
+
+    // Update the head of the original linked list to point to the beginning of the list of zeros
+    *head = zero->next;
+}
+
+//Time Complexity: O(n), where n is the number of nodes in the linked list. The algorithm traverses the entire linked list once.
