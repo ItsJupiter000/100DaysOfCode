@@ -1,0 +1,46 @@
+🚀 Day 47 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 160. Intersection of Two Linked Lists
+🔗 Problem Link: https://lnkd.in/dm7jERNB
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        // Check if either of the linked lists is empty
+        if(!headA || !headB) {
+            return NULL;
+        }
+
+        // Initialize two pointers for traversing each linked list
+        ListNode *temp1 = headA;
+        ListNode *temp2 = headB;
+
+        // Traverse the linked lists until an intersection point is found
+        while(temp1 != temp2) {
+            // If temp1 reaches the end of list A, reset it to the head of B
+            if(temp1 == NULL) {
+                temp1 = headB;
+            } else {
+                // Move temp1 to the next node in list A
+                temp1 = temp1->next;
+            }
+
+            // If temp2 reaches the end of list B, reset it to the head of A
+            if(temp2 == NULL) {
+                temp2 = headA;
+            } else {
+                // Move temp2 to the next node in list B
+                temp2 = temp2->next;
+            }
+        }
+
+        // Return the intersection point (or NULL if no intersection is found)
+        return temp1;
+    }
+};
+
+//Time Complexity: O(m + n), where m and n are the lengths of the two linked lists. The loop iterates until an intersection is found or both pointers reach the end of the lists, and in the worst case, it traverses the entire length of both lists.
+
+
+
+
