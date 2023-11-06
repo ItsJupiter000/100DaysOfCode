@@ -1,0 +1,52 @@
+🚀 Day 48 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 24. Swap Nodes in Pairs
+🔗 Problem Link: https://lnkd.in/dkt7vYpn
+
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        // Check if the list is empty or has only one node
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+
+        // Initialize three pointers: prev, curr, and nxt
+        ListNode *prev = nullptr;
+        ListNode *curr = head;
+        ListNode *nxt = head->next;
+
+        // Update the head to point to the second node (nxt)
+        head = head->next;
+
+        // Loop through the list and swap pairs of nodes
+        while (curr && nxt) {
+            // If there is a previous node, update its next to point to nxt
+            if (prev)
+                prev->next = nxt;
+
+            // Update the current node's next to point to the node after nxt
+            curr->next = nxt->next;
+
+            // Swap the positions of curr and nxt
+            nxt->next = curr;
+
+            // Move prev and curr pointers to their next nodes
+            prev = curr;
+            curr = curr->next;
+
+            // If curr is not nullptr, update nxt to its next node
+            if (curr)
+                nxt = curr->next;
+        }
+
+        // Return the new head of the swapped list
+        return head;
+    }
+};
+
+//Time Complexity: O(n), where n is the number of nodes in the linked list. The loop iterates through the list once, and each iteration involves constant time operations.
+
+
+
+
