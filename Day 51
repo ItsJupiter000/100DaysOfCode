@@ -1,0 +1,65 @@
+🚀 Day 51 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Stack Implementation Using Array
+🔗 Problem Link: https://lnkd.in/d6Shu4T3
+
+// Stack class.
+class Stack {
+public:
+    int len;      // Length of the stack (maximum capacity)
+    int* arr;     // Array to store stack elements
+    int topp;     // Index of the top element in the stack
+
+    // Constructor to initialize the stack with a given capacity
+    Stack(int capacity) {
+        this->len = capacity;
+        arr = new int[len];  // Allocate memory for the stack array
+        topp = -1;           // Initialize top index to -1 (empty stack)
+    }
+
+    // Push method to add an element to the top of the stack
+    void push(int num) {
+        if (topp < len - 1) {   // Check if there is space in the stack
+            topp++;             // Increment top index
+            arr[topp] = num;     // Store the element at the top index
+        }
+        else return;  // Stack is full, do nothing (or throw an exception)
+    }
+
+    // Pop method to remove and return the element from the top of the stack
+    int pop() {
+        if (topp > -1) {        // Check if the stack is not empty
+            int x = arr[topp];   // Get the element at the top
+            topp--;              // Decrement top index (removing the element)
+            return x;            // Return the popped element
+        }
+        else return -1;  // Stack is empty, return -1 (or throw an exception)
+    }
+
+    // Top method to return the element at the top of the stack without removing it
+    int top() {
+        if (topp > -1)
+            return arr[topp];   // Return the element at the top
+        else
+            return -1;          // Stack is empty, return -1
+    }
+
+    // isEmpty method to check if the stack is empty
+    int isEmpty() {
+        return (topp == -1) ? 1 : 0;  // Return 1 if empty, 0 if not
+    }
+
+    // isFull method to check if the stack is full
+    int isFull() {
+        return (topp == len - 1) ? 1 : 0;  // Return 1 if full, 0 if not
+    }
+};
+
+//Time Complexity Analysis:
+
+Push operation (push): O(1) - Constant time, as it involves simple arithmetic and assignment operations.
+Pop operation (pop): O(1) - Constant time, similar to push, involves basic arithmetic and assignment operations.
+Top operation (top): O(1) - Constant time, as it directly accesses the top element.
+isEmpty operation (isEmpty): O(1) - Constant time, as it involves a simple comparison.
+isFull operation (isFull): O(1) - Constant time, also a basic comparison.
+The overall time complexity for each operation in this stack implementation is constant, making it an efficient implementation.
