@@ -1,0 +1,42 @@
+🚀 Day 52 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Implement Queue using Arrays
+🔗 Problem Link: https://lnkd.in/dywEaVZH
+
+class Queue {
+    int front, rear;
+    vector<int> arr;  // Using a vector to store the elements of the queue.
+
+public:
+    Queue() {
+        front = 0;  // Initialize front to 0.
+        rear = 0;   // Initialize rear to 0.
+        arr.resize(100001);  // Set the maximum size of the queue to 100001.
+    }
+
+    // Enqueue (add) element 'e' at the end of the queue.
+    void enqueue(int e) {
+        // Check if the rear has reached the maximum size of the queue.
+        if (rear == arr.size())
+            return;  // If so, do nothing (queue is full).
+        else {
+            arr[rear] = e;  // Otherwise, add the element at the rear.
+            rear++;         // Move the rear pointer to the next position.
+        }
+    }
+
+    // Dequeue (retrieve) the element from the front of the queue.
+    int dequeue() {
+        // Check if the front is equal to the rear, indicating an empty queue.
+        if (front == rear)
+            return -1;  // If so, return -1 to indicate that the queue is empty.
+        else {
+            int x = arr[front];  // Otherwise, retrieve the element at the front.
+            front++;             // Move the front pointer to the next position.
+            return x;            // Return the retrieved element.
+        }
+    }
+};
+
+
+//The time complexity of both enqueue and dequeue operations is O(1), constant time complexity, because accessing elements in a vector by index takes constant time.
