@@ -1,0 +1,53 @@
+🚀 Day 53 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 225. Implement Stack using Queues
+🔗 Problem Link: https://lnkd.in/dA9zQRRJ
+
+class MyStack {
+public:
+    MyStack() {   }
+    queue<int>q;  // Using a queue to implement a stack
+
+    void push(int x) {        
+        int n = q.size();  // Get the current size of the queue
+        q.push(x);  // Push the new element onto the queue
+
+        // Rearrange the queue elements to simulate a stack
+        for (int i = 0; i < n; i++) {
+            q.push(q.front());  // Move each element to the back of the queue
+            q.pop();  // Remove the front element (original order is now reversed)
+        }
+    }
+    
+    int pop() {
+        int n = q.front();  // Get the front element (top of the stack)
+        q.pop();  // Remove the front element
+        return n;  // Return the popped element
+    }
+    
+    int top() {
+        return q.front();  // Return the front element without removing it (top of the stack)
+    }
+    
+    bool empty() {
+        return q.empty();  // Check if the stack is empty based on the underlying queue
+    }
+};
+
+//Push Operation:
+
+Enqueuing the new element takes O(1).
+Rearranging the elements takes O(n), where n is the number of elements in the queue at that moment.
+So, the overall time complexity of push is O(n).
+Pop Operation:
+
+Dequeuing the front element takes O(1).
+So, the time complexity of pop is O(1).
+Top Operation:
+
+Accessing the front element takes O(1).
+So, the time complexity of top is O(1).
+Empty Operation:
+
+Checking if the queue is empty takes O(1).
+So, the time complexity of empty is O(1).
