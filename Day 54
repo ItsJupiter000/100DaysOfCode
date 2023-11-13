@@ -1,0 +1,31 @@
+🚀 Day 54 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 162. Find Peak Element
+🔗 Problem Link: https://lnkd.in/dsZdxaRx
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        // Initialize low and high for binary search
+        int low = 0;
+        int high = nums.size() - 1;
+
+        // Binary search loop
+        while (low < high) {
+            // Calculate mid point
+            int mid = (low + high) / 2;
+
+            // Check if the peak is on the right side
+            if (nums[mid] < nums[mid + 1]) {
+                low = mid + 1; // Move low to the right
+            } else {
+                high = mid; // Move high to the left (including mid)
+            }
+        }
+
+        // When low == high, it's the peak element
+        return low;
+    }
+};
+
+The time complexity of this algorithm is O(log N) due to the binary search, where N is the size of the input array nums.
