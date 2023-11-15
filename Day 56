@@ -1,0 +1,14 @@
+🚀 Day 56 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 175. Combine Two Tables
+🔗 Problem Link: https://leetcode.com/problems/combine-two-tables/description/
+
+-- Selecting columns from the Person and Address tables
+-- We want to retrieve firstName, lastname, city, and state
+SELECT firstName, lastname, city, state
+FROM Person
+
+-- Performing a LEFT JOIN to combine rows from Person and Address based on personID
+-- If there is no match in the Address table, NULL values will be shown for Address columns
+LEFT JOIN Address ON Person.personID = Address.personID;
+
