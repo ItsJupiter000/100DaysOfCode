@@ -1,0 +1,9 @@
+🚀 Day 57 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 181. Employees Earning More Than Their Managers
+🔗 Problem Link: https://lnkd.in/duWnStwF
+
+# Write your MySQL query statement below
+SELECT name as Employee From Employee emp
+WHERE salary > (SELECT salary FROM Employee WHERE id = emp.managerId);
+
