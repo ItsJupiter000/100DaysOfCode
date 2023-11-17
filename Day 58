@@ -1,0 +1,13 @@
+🚀 Day 58 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 182. Duplicate Emails
+🔗 Problem Link: https://lnkd.in/g-t83v3t
+
+# Write your MySQL query statement below
+SELECT email from Person
+GROUP BY email
+HAVING COUNT(email) > 1;
+
+#Second Method 
+#SELECT DISTINCT P1.Email FROM Person P1,Person P2 
+#WHERE P1.id <> P2.id AND P1.Email = P2.Email
