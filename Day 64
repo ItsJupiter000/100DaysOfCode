@@ -1,0 +1,30 @@
+🚀 Day 64 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 595. Big Countries
+🔗 Problem Link: https://lnkd.in/d7CzQAQQ
+
+------------------------MYSQL------------------------------------
+-- Selecting the columns 'name', 'population', and 'area'
+SELECT 
+    name,
+    population,
+    area
+FROM 
+    World
+WHERE 
+    area >= 3000000 OR population >= 25000000;
+
+------------------------PANDAS------------------------------------
+import pandas as pd
+
+def big_countries(world: pd.DataFrame) -> pd.DataFrame:
+    # Selecting only the specified columns ('name', 'area', 'population')
+    filtered_columns = world[['name', 'area', 'population']]
+    
+    # Filtering rows where either the 'area' is greater than or equal to 3000000
+    # OR the 'population' is greater than or equal to 25000000
+    res_df = filtered_columns[(filtered_columns['area'] >= 3000000) | (filtered_columns['population'] >= 25000000)]
+    
+    # Returning the resulting DataFrame
+    return res_df
+
