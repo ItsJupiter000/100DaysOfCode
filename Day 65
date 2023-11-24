@@ -1,0 +1,19 @@
+🚀 Day 65 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 177. Nth Highest Salary
+🔗 Problem Link: https://lnkd.in/dKKvXUnz
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  -- Adjust N to work with the LIMIT clause (0-based indexing)
+  SET N = N-1;
+  
+  -- Use RETURN to return the result of the query
+  RETURN (
+      # Write your MySQL query statement below.
+      -- Select the distinct salary from the Employee table,
+      -- order them in descending order, and limit the result to the Nth salary with a step of 1.
+      SELECT DISTINCT(salary) from Employee order by salary DESC
+      LIMIT N,1
+  );
+END;
