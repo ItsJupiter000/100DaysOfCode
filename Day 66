@@ -1,0 +1,27 @@
+🚀 Day 66 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 1614. Maximum Nesting Depth of the Parentheses
+🔗 Problem Link: https://lnkd.in/dXz4a4G3
+
+#include<stack>
+
+class Solution {
+public:
+    int maxDepth(string s) {
+        int c = 0;  // Counter to keep track of the current depth
+        int ans = 0;  // Variable to store the maximum depth encountered so far
+
+        for(int i=0; i<s.length(); i++) {
+            if(s[i] == '(') {
+                c++;  // Increment the depth when an opening parenthesis is encountered
+            } else if(s[i] == ')') {
+                ans = max(ans, c);  // Update the maximum depth if the current depth is greater
+                c--;  // Decrement the depth when a closing parenthesis is encountered
+            }
+        }
+
+        return ans;  // Return the maximum depth encountered in the string
+    }
+};
+
+Time Complexity: The time complexity of this algorithm is O(N), where N is the length of the input string s. The algorithm iterates through each character in the string once.
