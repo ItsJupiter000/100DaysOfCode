@@ -1,0 +1,37 @@
+🚀 Day 67 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 1475. Final Prices With a Special Discount in a Shop
+🔗 Problem Link: https://lnkd.in/dRqnXPWh
+
+class Solution {
+public:
+    // Function to calculate the final prices after applying discounts
+    vector<int> finalPrices(vector<int>& prices) {
+        // Stack to keep track of indices of elements in the 'prices' array
+        stack<int> s;
+        
+        // Initialize 'ans' vector with the same values as 'prices'
+        vector<int> ans = prices;
+
+        // Iterate through the 'prices' array
+        for(int i = 0; i < prices.size(); i++) {
+            // Check if the stack is not empty and the current price is less than or equal to the price at the top of the stack
+            while ((!s.empty()) && (prices[s.top()] >= prices[i])) {
+                // Apply discount to the element at the top of the stack
+                ans[s.top()] = prices[s.top()] - prices[i];
+                
+                // Pop the index from the stack as it has been processed
+                s.pop();
+            }
+            
+            // Push the current index onto the stack
+            s.push(i);
+        }
+        
+        // 'ans' vector now contains the final prices after applying discounts
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n) - where 'n' is the number of elements in the 'prices' vector. Each element is pushed and popped from the stack at most once. The while loop inside the for loop contributes to a linear time complexity.
