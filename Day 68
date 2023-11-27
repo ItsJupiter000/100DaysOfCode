@@ -1,0 +1,29 @@
+🚀 Day 68 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 387. First Unique Character in a String
+🔗 Problem Link: https://lnkd.in/dzen6N72
+
+#include <string>
+#include <vector>
+
+class Solution {
+public:
+    int firstUniqChar(std::string s) {
+        int n = s.length();                 // Get the length of the input string
+        std::vector<int> freq(256, 0);      // Initialize a vector to store the frequency of each ASCII character
+
+        for(int i = 0; s[i] != '\0'; i++) { // Loop through each character in the string
+            freq[s[i]]++;                   // Increment the frequency of the current character
+        }
+
+        for(int i = 0; i < n; i++) {         // Loop through each character in the string again
+            if(freq[s[i]] == 1) {           // Check if the frequency of the current character is 1 (unique)
+                return i;                    // If unique, return the index of the first occurrence of the character
+            }
+        }
+
+        return -1;                          // If no unique character found, return -1
+    }
+};
+
+Time Complexity: O(n), where n is the length of the input string. Both loops iterate through the string once, and the operations inside the loops are constant time.
