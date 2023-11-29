@@ -1,0 +1,39 @@
+🚀 Day 70 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 2073. Time Needed to Buy Tickets
+🔗 Problem Link: https://lnkd.in/dzc3xg9e
+
+class Solution {
+public:
+    int timeRequiredToBuy(vector<int>& tickets, int k) {
+        int i, time = 0;
+
+        // Infinite loop to keep buying tickets until tickets[k] becomes zero
+        while (true) {
+            // Iterate through the vector of tickets
+            for (i = 0; i < tickets.size(); i++) {
+                // Check if the desired ticket (at index k) is sold out
+                if (tickets[k] == 0)
+                    return time;
+                // If the current ticket is available, buy it
+                else if (tickets[i] > 0) {
+                    tickets[i]--;  // Decrease the available count of the current ticket
+                    time++;        // Increase the time required to buy tickets
+                }
+            }
+            // Reset the index for the next iteration
+            i = 0;
+        }
+        // This line is never reached because the function returns in the while loop
+        return time;
+    }
+};
+
+
+Time Complexity:
+The time complexity of this code is not easy to determine precisely because it depends on the initial distribution of ticket counts. In the worst case, it could be O(n * m), where n is the number of tickets and m is the maximum ticket count, as it may need to iterate through the entire vector for each ticket purchase. This could be optimized, but it would require a different approach.
+
+
+
+
+
