@@ -1,0 +1,43 @@
+🚀 Day 74 of hashtag#100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 94. Binary Tree Inorder Traversal
+🔗 Problem Link: https://lnkd.in/dPaRBHtQ
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    // Declare a vector to store the result of inorder traversal
+    vector<int> ans;
+
+    // Inorder traversal function
+    vector<int> inorderTraversal(TreeNode* root) {
+        // Base case: If the current node is null, return the result vector
+        if(root == nullptr){
+            return ans;
+        }     
+
+        // Recursive call for the left subtree
+        inorderTraversal(root -> left);
+
+        // Process the current node by adding its value to the result vector
+        ans.push_back(root->val);
+
+        // Recursive call for the right subtree
+        inorderTraversal(root -> right);
+
+        // Return the final result vector
+        return ans;
+    }
+};
+
+Time Complexity: The time complexity of this recursive approach is O(N), where N is the number of nodes in the binary tree. This is because each node is visited exactly once.
