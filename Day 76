@@ -1,0 +1,77 @@
+🚀 Day 76 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 102. Binary Tree Level Order Traversal
+🔗 Problem Link: https://lnkd.in/dEgfqudg
+
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+/**
+ * Definition for a binary tree node.
+ */
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        // Initialize the result vector to store the levels of the binary tree
+        vector<vector<int>> res;
+        
+        // Check if the tree is empty
+        if (root == nullptr) return res;
+
+        // Create a queue to perform level-order traversal
+        queue<TreeNode*> q;
+        
+        // Enqueue the root node to start the traversal
+        q.push(root);
+
+        // Continue traversal while the queue is not empty
+        while (!q.empty()) {
+            // Get the number of nodes at the current level
+            int n = q.size();
+            
+            // Vector to store values at the current level
+            vector<int> val;
+
+            // Process all nodes at the current level
+            for (int i = 0; i < n; i++) {
+                // Dequeue a node from the front of the queue
+                TreeNode* node = q.front();
+                q.pop();
+
+                // Enqueue the left child if it exists
+                if (node->left != nullptr) {
+                    q.push(node->left);
+                }
+
+                // Enqueue the right child if it exists
+                if (node->right != nullptr) {
+                    q.push(node->right);
+                }
+
+                // Add the value of the current node to the level vector
+                val.push_back(node->val);
+            }
+
+            // Add the level vector to the result vector
+            res.push_back(val);
+        }
+
+        // Return the result vector containing levels of the binary tree
+        return res;
+    }
+};
+
+
+Time Complexity:
+The time complexity of this algorithm is O(N), where N is the number of nodes in the binary tree. Each node is processed once during the level-order traversal.
