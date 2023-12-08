@@ -1,0 +1,51 @@
+🚀 Day 79 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 543. Diameter of Binary Tree
+🔗 Problem Link: https://lnkd.in/dujZaEQF
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class Solution {
+public:
+    // Function to calculate the length of the longest path between two nodes in a binary tree
+    int Length(TreeNode* root, int& ans) {
+        // Base case: if the current node is NULL, return 0
+        if(root == NULL){
+            return 0;
+        }
+        // Recursive call to find the length in the left subtree
+        int l = Length(root->left, ans);
+        // Recursive call to find the length in the right subtree
+        int r = Length(root->right, ans);
+        // Update the answer with the length passing through the current node
+        ans = max(ans, 1 + l + r);
+        // Return the length of the path starting from the current node
+        return 1 + max(l, r);  
+    }
+    
+    // Main function to calculate the diameter of the binary tree
+    int diameterOfBinaryTree(TreeNode* root) {
+        // Initialize the answer variable to 0
+        int ans = 0;
+        // Base case: if the tree is empty, return 0
+        if(root == NULL){
+            return 0;
+        }    
+        // Call the Length function to calculate the path lengths and update the answer
+        Length(root, ans);
+        // Return the diameter of the binary tree (ans - 1, as per the problem definition)
+        return (ans - 1);
+    }
+};
+
+The time complexity of the code is O(N), where N is the number of nodes in the binary tree. This is because each node is visited once, and the recursion depth is at most N in the worst case.
