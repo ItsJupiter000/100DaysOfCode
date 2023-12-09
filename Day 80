@@ -1,0 +1,52 @@
+🚀 Day 80 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 124. Binary Tree Maximum Path Sum
+🔗 Problem Link: https://lnkd.in/dGTniS5G
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class Solution {
+public:
+    // Function to find the maximum path sum in a binary tree
+    int maxPathSum(TreeNode* root) {
+        // Initialize max_dist to store the maximum path sum
+        int max_dist = 0;
+        // Call the DFS function to traverse the tree and update max_dist
+        DFS(root, max_dist);
+        // Return the overall maximum path sum
+        return max_dist;
+    }
+
+private:
+    // DFS function to calculate the maximum path sum for a subtree rooted at 'root'
+    int DFS(TreeNode* root, int& max_dist) {
+        // Base case: If the current node is NULL, return 0
+        if (root == nullptr) {
+            return 0;
+        }
+
+        // Recursively calculate the maximum path sum for the left subtree
+        int left_max = max(DFS(root->left, max_dist), 0);
+        
+        // Recursively calculate the maximum path sum for the right subtree
+        int right_max = max(DFS(root->right, max_dist), 0);
+        
+        // Update max_dist with the maximum sum that includes the current node
+        max_dist = max(max_dist, root->val + left_max + right_max);
+        
+        // Return the maximum path sum that includes the current node
+        return root->val + max(left_max, right_max);
+    }
+};
+
+Time complexity of this code is O(N), where N is the number of nodes in the binary tree. Each node is visited once, and the operations performed at each node take constant time.
