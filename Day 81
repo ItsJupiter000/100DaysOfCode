@@ -1,0 +1,36 @@
+🚀 Day 81 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 1791. Find Center of Star Graph
+🔗 Problem Link: https://lnkd.in/dJZCS5gG
+
+class Solution {
+public:
+    // Function to find the center of a tree given its edges
+    int findCenter(vector<vector<int>>& edges) {
+        // Calculate the number of nodes in the tree (assuming it's connected)
+        int n = edges.size() + 1;
+
+        // Create a vector to represent the adjacency list of each node
+        vector<int> ans[n + 1];
+
+        // Populate the adjacency list using the provided edges
+        for (int i = 0; i < edges.size(); i++) {
+            ans[edges[i][0]].push_back(edges[i][1]);
+            ans[edges[i][1]].push_back(edges[i][0]);
+        }
+
+        // Iterate through each node
+        for (int i = 1; i < n + 1; i++) {
+            // Check if the number of connected nodes is equal to n-1 (center node condition)
+            if (ans[i].size() == edges.size()) {
+                // If true, return the center node
+                return i;
+            }
+        }
+
+        // If no center node is found, return -1
+        return -1;
+    }
+};
+
+Time complexity of this code is O(n), where n is the number of nodes in the tree. The loops iterate through each node once, and the operations inside the loops take constant time.
