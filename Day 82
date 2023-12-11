@@ -1,0 +1,31 @@
+🚀 Day 82 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Graph Representation in C++
+🔗 Problem Link: https://lnkd.in/dr6_ySnu
+
+vector<vector<int>> printAdjacency(int n, int m, vector<vector<int>> &edges) {
+    // Create an adjacency list with 'n' empty vectors
+    vector<vector<int>> adj(n);
+
+    // Iterate over each node
+    for (int i = 0; i < n; i++) {
+        // Add the node itself as the first element in its row
+        adj[i].push_back(i);
+    }
+
+    // Iterate over each edge
+    for (int i = 0; i < m; i++) {
+        // Get the vertices 'u' and 'v' from the current edge
+        int u = edges[i][0];
+        int v = edges[i][1];
+
+        // Add 'v' to the adjacency list of 'u', and vice versa, forming an undirected edge
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    // The adjacency list is now constructed, return it
+    return adj;
+}
+
+Time Complexity: The time complexity of this code is O(n + m), where 'n' is the number of nodes and 'm' is the number of edges. The first loop takes O(n) time, and the second loop takes O(m) time. The overall complexity is dominated by the larger of the two, so it is O(n + m).
