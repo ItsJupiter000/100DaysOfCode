@@ -1,0 +1,48 @@
+🚀 Day 83 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Find the Number of Provinces
+🔗 Problem Link: https://lnkd.in/dSQmz6HU
+
+// The function takes a vector of vectors 'roads' representing connections between cities
+// and an integer 'n' representing the total number of cities.
+int findNumOfProvinces(vector<vector<int>>& roads, int n) {
+    // Array to keep track of visited cities. Initialized to 0 (not visited).
+    int visited[n+1] = {0};
+    
+    // Counter to keep track of the number of provinces.
+    int count = 0;
+    
+    // Loop through each city.
+    for(int i = 0; i < n; i++) {
+        // Check if the current city is not visited.
+        if(visited[i] != 1) {
+            // Variable to check if the current city is not connected to any visited city.
+            bool notVisited = true;
+            
+            // Loop through each city to check connections.
+            for(int j = 0; j < n; j++) {
+                // Check if there is a road/connection between the current city (i) and city (j).
+                if(roads[i][j] == 1) {
+                    // Check if city (j) has been visited.
+                    if(visited[j] == 1) {
+                        // If city (j) is visited, set notVisited to false.
+                        notVisited = false;
+                    }
+                    
+                    // Mark city (j) as visited.
+                    visited[j] = 1;
+                }
+            }
+            
+            // If the current city is not connected to any visited city, increment the province count.
+            notVisited && count++;
+        }
+    }
+    
+    // Return the total number of provinces.
+    return count;
+}
+
+
+Time Complexity:
+The time complexity of this code is O(n^2) because there are nested loops iterating through each city and its connections. The worst-case scenario occurs when every city is connected to every other city.
