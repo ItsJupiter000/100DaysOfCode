@@ -1,0 +1,45 @@
+🚀 Day 85 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: DFS of Graph
+🔗 Problem Link: https://lnkd.in/d7aUqsPR
+
+class Solution {
+private:
+    // Private helper function for DFS traversal
+    void dfs(int node, vector<int> adj[], int visited[], vector<int> &ans) {
+        // Mark the current node as visited
+        visited[node] = 1;
+
+        // Add the current node to the DFS result
+        ans.push_back(node);
+
+        // Traverse neighbors of the current node
+        for (auto i : adj[node]) {
+            // If the neighbor has not been visited, recursively call DFS
+            if (visited[i] == 0) {
+                dfs(i, adj, visited, ans);
+            }
+        }
+    }
+
+public:
+    // Function to return a list containing the DFS traversal of the graph.
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Array to keep track of visited nodes, initialized to 0
+        int visited[V] = {0};
+
+        // Starting node for DFS traversal
+        int start = 0;
+
+        // Vector to store the DFS traversal result
+        vector<int> ans;
+
+        // Call the DFS function starting from the specified node
+        dfs(start, adj, visited, ans);
+
+        // Return the DFS traversal result
+        return ans;
+    }
+};
+
+Time Complexity: The time complexity of the DFS traversal in an adjacency list representation is O(V + E), where V is the number of vertices and E is the number of edges in the graph.
