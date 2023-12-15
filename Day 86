@@ -1,0 +1,36 @@
+🚀 Day 86 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 547. Number of Provinces
+🔗 Problem Link: https://lnkd.in/gTxq2gbp
+
+class Solution {
+public:
+    // DFS function to traverse the connected nodes in the graph
+    void DFS(vector<vector<int>> arr, int i, int visited[]) {
+        for (int j = 0; j < arr.size(); j++) {
+            // If there's a connection between nodes i and j and j is not visited
+            if (arr[i][j] == 1 && visited[j] == 0) {
+                visited[j] = 1;  // Mark node j as visited
+                DFS(arr, j, visited);  // Recursive call for DFS from node j
+            }
+        }
+    }
+
+    // Main function to find the number of connected components in the graph
+    int findCircleNum(vector<vector<int>>& arr) {
+        int n = arr.size();
+        int visited[n];
+        memset(visited, 0, sizeof(visited));  // Initialize the visited array with 0
+        int ans = 0;  // Counter for the number of connected components
+
+        for (int i = 0; i < n; i++) {
+            if (visited[i] == 0) {
+                ans++;  // Increment the counter as a new connected component is found
+                DFS(arr, i, visited);  // Perform DFS from node i to mark all connected nodes
+            }
+        }
+        return ans;  // Return the total number of connected components
+    }
+};
+
+The time complexity of this algorithm is O(N^2), where N is the number of nodes in the graph. This is because for each node, the DFS function may visit all other nodes in the worst case, resulting in an N^2 complexity.
