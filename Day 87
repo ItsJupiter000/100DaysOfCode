@@ -1,0 +1,39 @@
+🚀 Day 87 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Topological sort
+🔗 Problem Link: https://lnkd.in/dYVRGR3A
+
+class Solution {
+private:
+    // Helper function for Depth First Search (DFS)
+    void dfs(int node, int visited[], stack<int> &st, vector<int> adj[]) {
+        visited[node] = 1; // Mark the current node as visited
+        for (auto i : adj[node]) {
+            if (!visited[i]) {
+                dfs(i, visited, st, adj); // Recursive DFS call for unvisited neighbors
+            }
+        }
+        st.push(node); // Push the current node to the stack after visiting its neighbors
+    }
+
+public:
+    // Function to return a list containing vertices in Topological order.
+    vector<int> topoSort(int V, vector<int> adj[]) {
+        int visited[V] = {0}; // Initialize an array to track visited nodes
+        stack<int> st; // Stack to store the topological order
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                dfs(i, visited, st, adj); // Call DFS for each unvisited node in the graph
+            }
+        }
+        vector<int> ans;
+        while (!st.empty()) {
+            ans.push_back(st.top()); // Push nodes from the stack to the result vector
+            st.pop();
+        }
+        return ans; // Return the topological order
+    }
+};
+
+
+The time complexity of this topological sort algorithm is O(V + E), where V is the number of vertices and E is the number of edges in the graph. The DFS function visits each node and each edge once.
