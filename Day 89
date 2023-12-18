@@ -1,0 +1,64 @@
+🚀 Day 89 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Prim’s Algorithm – Minimum Spanning Tree
+🔗 Problem Link: https://lnkd.in/dfzDZiMm
+
+class Solution
+{
+public:
+    // Function to find the sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // Priority queue to store pairs of {weight, node}.
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+        // Vector to keep track of visited nodes.
+        vector<int> visited(V, 0);
+
+        // Initialize the priority queue with {weight=0, node=0}.
+        pq.push({0, 0});
+
+        // Variable to store the sum of weights of the Minimum Spanning Tree.
+        int sum = 0;
+
+        // Main loop to explore the Minimum Spanning Tree.
+        while (!pq.empty())
+        {
+            // Extract the pair with the minimum weight.
+            auto current = pq.top();
+            pq.pop();
+
+            // Extract the node and weight from the pair.
+            int node = current.second;
+            int weight = current.first;
+
+            // If the node is already visited, skip it.
+            if (visited[node] == 1)
+                continue;
+
+            // Mark the current node as visited.
+            visited[node] = 1;
+
+            // Add the weight of the current edge to the total sum.
+            sum += weight;
+
+            // Explore adjacent nodes.
+            for (auto neighbor : adj[node])
+            {
+                int adjNode = neighbor[0]; // Adjacent node
+                int edgeWeight = neighbor[1]; // Weight of the edge
+
+                // If the adjacent node is not visited, add it to the priority queue.
+                if (!visited[adjNode])
+                {
+                    pq.push({edgeWeight, adjNode});
+                }
+            }
+        }
+
+        // Return the sum of weights of edges of the Minimum Spanning Tree.
+        return sum;
+    }
+};
+
+The time complexity of the Prim's algorithm implemented here is O(E log V), where E is the number of edges and V is the number of vertices. This is because each edge is processed once, and the priority queue operations take O(log V) time.
