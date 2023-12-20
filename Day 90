@@ -1,0 +1,53 @@
+🚀 Day 90 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Detect Cycle in an Undirected Graph
+🔗 Problem Link: https://lnkd.in/dCZ4xcug
+
+class Graph {
+public:
+    // Helper function for DFS to check if there is a cycle starting from a given node
+    bool isDFSCycle(int node, int parent, vector<bool>& visited, vector<int> adj[]) {
+        // Mark the current node as visited
+        visited[node] = true;
+
+        // Traverse all adjacent nodes
+        for (int &child : adj[node]) {
+            if (!visited[child]) {
+                // If the child is not visited, recursively call the function
+                if (isDFSCycle(child, node, visited, adj)) {
+                    return true;  // If a cycle is detected in the recursion, return true
+                }
+            } else if (child != parent) {
+                return true;  // If the child is visited and not the parent, it forms a back edge and indicates a cycle
+            }
+        }
+
+        return false;  // If no cycle is detected in this DFS traversal, return false
+    }
+
+    // Function to detect a cycle in the graph using DFS
+    bool detectCycle(int V, vector<int> adj[]) {
+        // Create a vector to keep track of visited nodes
+        vector<bool> visited(V, false);
+
+        // Traverse all nodes in the graph
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                // If the current node is not visited, check for a cycle starting from this node
+                if (isDFSCycle(i, -1, visited, adj)) {
+                    return true;  // If a cycle is detected, return true
+                }
+            }
+        }
+
+        return false;  // If no cycle is detected in the entire graph, return false
+    }
+};
+
+
+The time complexity of the code is O(V + E), where V is the number of vertices and E is the number of edges in the graph. This is because each vertex and each edge are visited once in the worst case during the DFS traversal.
+
+
+
+
+
