@@ -1,0 +1,90 @@
+🚀 Day 92 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 1710. Maximum Units on a Truck (Fractional Knapsack)
+🔗 Problem Link: https://lnkd.in/dJZE59A9
+
+-----------------------------------------------------------------------------------------------------------------------
+
+// Comparator function to sort box types in descending order based on the number of units in each box.
+static bool cmp(vector<int>& a, vector<int>& b) {
+    return a[1] > b[1];
+}
+
+// Function to find the maximum units that can be loaded onto a truck.
+int maximumUnits(vector<vector<int>>& boxtypes, int truckSize) {
+    int Sum = 0; // Initialize the total sum of units to be loaded on the truck.
+
+    // Sort the box types in descending order based on the number of units.
+    sort(boxtypes.begin(), boxtypes.end(), cmp);
+
+    // Iterate through each box type and load units onto the truck.
+    for (int i = 0; i < boxtypes.size() && truckSize > 0; i++) {
+        // Check if we can fully load the current box type onto the truck.
+        if (truckSize - boxtypes[i][0] > 0) {
+            // Fully load the current box type onto the truck.
+            truckSize -= boxtypes[i][0];
+            Sum += (boxtypes[i][0] * boxtypes[i][1]);
+        } else {
+            // Load the remaining available space on the truck with the current box type.
+            Sum += (truckSize * boxtypes[i][1]);
+            truckSize = 0; // Truck is fully loaded, so set remaining space to 0.
+        }
+    }
+
+    // The 'Sum' now contains the maximum units that can be loaded onto the truck.
+    return Sum;
+}
+
+Time complexity analysis:
+
+Sorting the box types takes O(N log N) time, where N is the number of box types.
+The for loop iterates through the box types once, and each iteration is O(1).
+Therefore, the overall time complexity is dominated by the sorting step, O(N log N).
+So, the overall time complexity is O(N log N).
+
+---------------------------------------------------------------------------------------------------------------------------  
+
+class Solution
+{
+public:
+    // Comparator function to compare Items based on value-to-weight ratio in descending order.
+    bool static Compare(Item a, Item b) {
+        double i1 = (double) a.value / (double) a.weight;
+        double i2 = (double) b.value / (double) b.weight;
+        return i1 > i2;
+    }
+
+    // Function to get the maximum total value in the knapsack using fractional knapsack approach.
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Sort the items based on their value-to-weight ratio in descending order.
+        sort(arr, arr + n, Compare);
+
+        int curr_weight = 0; // Initialize current weight in the knapsack.
+        double Sum = 0.0;    // Initialize total value in the knapsack.
+
+        // Iterate through each item and add it to the knapsack if there is space.
+        for (int i = 0; i < n; i++) {
+            // Check if adding the entire item is possible without exceeding the knapsack capacity.
+            if (curr_weight + arr[i].weight <= W) {
+                curr_weight += arr[i].weight; // Add the entire item to the knapsack.
+                Sum += arr[i].value;          // Add the value of the item to the total.
+            } else {
+                // Add a fraction of the item to fill the remaining knapsack capacity.
+                int left = W - curr_weight;
+                Sum += (arr[i].value / (double) arr[i].weight) * (double) left;
+                break; // Break the loop as the knapsack is now full.
+            }
+        }
+
+        // The 'Sum' now contains the maximum total value in the knapsack using fractional knapsack.
+        return Sum;
+    }
+};
+
+Time complexity analysis:
+
+Sorting the items takes O(N log N) time, where N is the number of items.
+The for loop iterates through the items once, and each iteration is O(1).
+Therefore, the overall time complexity is dominated by the sorting step, O(N log N).
+So, the overall time complexity is O(N log N).
