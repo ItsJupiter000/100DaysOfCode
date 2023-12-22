@@ -1,0 +1,51 @@
+🚀 Day 93 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Maximum Meetings in One Room
+🔗 Problem Link: https://lnkd.in/db6ykyy3
+
+class Solution {
+public:
+    vector<int> maxMeetings(int N, vector<int> &S, vector<int> &F) {
+        // Create a vector of pairs, where each pair contains the end time and the index of the meeting
+        vector<pair<int, int>> pr;
+        for(int i = 0; i < N; i++) {
+            pr.push_back(make_pair(F[i], i + 1));
+        }
+
+        // Sort the vector of pairs based on end times
+        sort(pr.begin(), pr.end());
+
+        // Initialize a vector to store the selected meeting indices
+        vector<int> ans;
+
+        // Always select the first meeting
+        ans.push_back(pr[0].second);
+
+        // Initialize a variable to keep track of the end time of the last selected meeting
+        int last_end_time = pr[0].first;
+
+        // If there is only one meeting, return the selected meeting indices
+        if(N == 1) {
+            return ans;
+        }
+
+        // Process the rest of the meetings
+        for(int i = 1; i < N; i++) {
+            // Check if the start time of the current meeting is after the end time of the last selected meeting
+            if(last_end_time < S[pr[i].second - 1]) {
+                // If yes, select the current meeting
+                ans.push_back(pr[i].second);
+                // Update the end time of the last selected meeting
+                last_end_time = pr[i].first;
+            }
+        }
+
+        // Sort the selected meeting indices
+        sort(ans.begin(), ans.end());
+
+        // Return the vector containing the selected meeting indices
+        return ans;
+    }
+};
+
+Time Complexity: O(N log N) - The dominant factor is the sorting of the vector of pairs based on end times.
