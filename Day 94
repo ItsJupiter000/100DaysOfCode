@@ -1,0 +1,60 @@
+🚀 Day 94 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 994. Rotting Oranges
+🔗 Problem Link: https://lnkd.in/d5PKJ5cm
+
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        if(grid.empty()) return 0;  // Check if the grid is empty, return 0 if so.
+        int m = grid.size();  // Number of rows in the grid
+        int n = grid[0].size();  // Number of columns in the grid
+        int day_cnt = 0, tot = 0, cnt = 0;  // Variables to keep track of days, total oranges, and rotten oranges.
+        queue<pair<int, int>> rotten;  // Queue to store coordinates of rotten oranges.
+
+        // Loop through the grid to initialize variables and find rotten oranges.
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] != 0) tot++;  // Count total oranges (excluding empty cells).
+                if(grid[i][j] == 2) rotten.push({i, j});  // If an orange is rotten, add its coordinates to the queue.
+            }
+        }
+
+        // Arrays to represent the four possible directions (up, down, left, right).
+        int dimx[4] = {0, 0, 1, -1};
+        int dimy[4] = {1, -1, 0, 0};
+
+        // Main loop to simulate the rotting process.
+        while(!rotten.empty()){
+            int a = rotten.size();  // Number of oranges in the current state of rotting.
+            cnt += a;  // Accumulate the count of rotten oranges.
+
+            // Process each rotten orange in the current state.
+            while(a--){
+                int x = rotten.front().first;  // X-coordinate of the current rotten orange.
+                int y = rotten.front().second;  // Y-coordinate of the current rotten orange.
+                rotten.pop();  // Remove the processed rotten orange from the queue.
+
+                // Check the four directions around the current orange.
+                for(int i = 0; i < 4; i++){
+                    int nx = x + dimx[i], ny = y + dimy[i];  // New coordinates in the current direction.
+
+                    // Check if the new coordinates are within bounds and the cell contains a fresh orange.
+                    if(nx < 0 || ny < 0 || nx >= m || ny >= n || grid[nx][ny] != 1) continue;
+
+                    grid[nx][ny] = 2;  // Mark the orange as rotten.
+                    rotten.push({nx, ny});  // Add the new rotten orange to the queue.
+                }
+            }
+
+            if(!rotten.empty()) day_cnt++;  // Increment the day count if there are more oranges to rot.
+        }
+
+        // If all oranges have been counted as rotten, return the number of days; otherwise, return -1.
+        return tot == cnt ? day_cnt : -1;
+    }
+};
+
+
+Time Complexity:
+The time complexity of this solution is O(m * n), where m is the number of rows and n is the number of columns in the grid. This is because, in the worst case, each cell is processed once in the grid during the rotting simulation. The use of the queue ensures that each orange is processed only once.
