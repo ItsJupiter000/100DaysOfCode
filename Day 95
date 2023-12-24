@@ -1,0 +1,70 @@
+🚀 Day 95 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 787. Cheapest Flights Within K Stops
+🔗 Problem Link: https://lnkd.in/dhBjTqEe
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        // Create an adjacency list to represent the graph
+        vector<pair<int, int>> adj[n];
+        for (auto i : flights)
+        {
+            adj[i[0]].push_back({i[1], i[2]});
+        }
+
+        // Create a queue for BFS traversal
+        queue<pair<int, pair<int, int>>> q;
+        
+        // Push the source node into the queue with initial cost 0
+        q.push({0, {src, 0}});
+        
+        // Initialize an array to store the minimum cost to reach each node
+        vector<int> dist(n, 1e9);
+        dist[src] = 0;
+       
+        // Perform BFS traversal
+        while (!q.empty())
+        {
+            // Get the front element from the queue
+            auto it = q.front();
+            q.pop();
+            
+            // Extract information from the current state
+            int stops = it.first;
+            int node = it.second.first;
+            int cost = it.second.second;
+
+            // If the number of stops exceeds the limit, skip this iteration
+            if (stops > k)
+                continue;
+
+            // Iterate through the adjacent nodes of the current node
+            for (auto i : adj[node])
+            {
+                int adj_node = i.first;  // Extract the adjacent node
+                int ed = i.second;       // Extract the edge weight
+
+                // If the new cost is less than the current known cost to reach the adjacent node
+                if (cost + ed < dist[adj_node] && stops <= k)
+                {
+                    // Update the minimum cost to reach the adjacent node
+                    dist[adj_node] = cost + ed;
+                    
+                    // Push the updated state into the queue for further exploration
+                    q.push({stops + 1, {adj_node, cost + ed}});
+                }
+            }
+        }
+
+        // If the destination node is not reachable, return -1
+        if (dist[dst] == 1e9)
+            return -1;
+        
+        // Return the minimum cost to reach the destination node
+        return dist[dst];
+    }
+};
+
+
+Time Complexity: The time complexity of this code is O(E + VlogV), where E is the number of edges in the graph, and V is the number of vertices. The priority queue in the BFS loop can have a maximum of E entries, and the priority queue operations take O(logV) time.
