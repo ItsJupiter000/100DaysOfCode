@@ -1,0 +1,47 @@
+🚀 Day 96 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 4. Median of Two Sorted Arrays
+🔗 Problem Link: https://lnkd.in/ds5Rm5_H
+
+#include <vector>
+#include <algorithm> // Required for the sort function
+
+class Solution {
+public:
+    double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) {
+        // Get the sizes of the input arrays
+        int m = nums1.size();
+        int n = nums2.size();
+        
+        // Create an array to merge both input arrays
+        int ans[m + n];
+        
+        // Copy elements from nums1 to the merged array
+        for (int i = 0; i < m; i++) {
+            ans[i] = nums1[i];
+        }
+
+        // Copy elements from nums2 to the merged array
+        for (int i = 0; i < n; i++) {
+            ans[m + i] = nums2[i];
+        }
+
+        // Sort the merged array in non-decreasing order
+        std::sort(ans, ans + m + n);
+
+        // Calculate the total size of the merged array
+        int x = m + n;
+
+        // Check if the total size is even or odd
+        if (x % 2 == 0) {
+            // If even, return the average of the two middle elements
+            return (ans[x / 2] + ans[x / 2 - 1]) / 2.0;
+        } else {
+            // If odd, return the middle element
+            return ans[x / 2];
+        }
+    }
+};
+
+Time Complexity:
+The time complexity of this solution is dominated by the sorting step, which is O((m+n) log(m+n)), where m and n are the sizes of the input arrays.
