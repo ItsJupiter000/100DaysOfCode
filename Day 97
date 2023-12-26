@@ -1,0 +1,50 @@
+🚀 Day 97 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 410. Split Array Largest Sum
+🔗 Problem Link: https://lnkd.in/dgmjhwJR
+
+class Solution {
+public:
+    // Function to count partitions with a given maximum sum
+    int count_partitions(vector<int> &nums, int max_sum) {
+        int n = nums.size();
+        int part = 1;  // Initialize the partition count to 1
+        long long sub_sum = 0;  // Initialize the current partition sum to 0
+
+        // Loop through the array elements
+        for (int i = 0; i < n; i++) {
+            // Check if adding the current element exceeds the maximum sum
+            if (sub_sum + nums[i] <= max_sum) {
+                sub_sum += nums[i];  // Add the current element to the current partition
+            } else {
+                part++;  // Increment partition count as we start a new partition
+                sub_sum = nums[i];  // Set the current element as the start of a new partition
+            }
+        }
+        return part;  // Return the total number of partitions
+    }
+
+    // Function to split the array into k partitions with minimized maximum sum
+    int splitArray(vector<int>& nums, int k) {
+        // Set the lower and upper bounds for binary search
+        int low = *max_element(nums.begin(), nums.end());
+        int high = accumulate(nums.begin(), nums.end(), 0);
+
+        // Perform binary search to find the minimum maximum sum
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int part = count_partitions(nums, mid);
+
+            // Adjust the bounds based on the number of partitions
+            if (part > k) {
+                low = mid + 1;  // Need larger maximum sum, so adjust the lower bound
+            } else {
+                high = mid - 1;  // Need smaller maximum sum, so adjust the upper bound
+            }
+        }
+        return low;  // Return the minimized maximum sum
+    }
+};
+
+
+Time Complexity: The time complexity of the binary search is O(log(high - low)), and for each iteration, the count_partitions function takes O(n) time. Therefore, the overall time complexity is O(n log(high - low)), where n is the size of the input array.
