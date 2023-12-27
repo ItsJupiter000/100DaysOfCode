@@ -1,0 +1,73 @@
+🚀 Day 98 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 25. Reverse Nodes in k-Group
+🔗 Problem Link: https://lnkd.in/dXVysWpx
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+class Solution {
+public:
+    // Function to find the length of the linked list
+    int find_length(ListNode* head) {
+        int len = 0;
+        while(head != NULL) {
+            len++;
+            head = head->next;
+        }
+        return len;
+    }
+
+    // Function to reverse nodes in k-group
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        // Check if the linked list is empty or has only one node
+        if(head == NULL || head->next == NULL){
+            return head;
+        } 
+        
+        // Find the length of the linked list
+        int l = find_length(head);  
+        
+        // Create a temporary dummy node to simplify the code
+        ListNode* temp_head = new ListNode(0);
+        temp_head->next = head;
+    
+        // Initialize pointers for reversing the k-group
+        ListNode* prev = temp_head;
+        ListNode* curr;
+        ListNode* nxt;
+    
+        // Iterate through the linked list in k-sized groups
+        while(l >= k) {
+            // Initialize current and next pointers
+            curr = prev->next;
+            nxt = curr->next;
+            
+            // Reverse the k-group
+            for(int i=1; i<k; i++) {
+                curr->next = nxt->next;
+                nxt->next = prev->next;
+                prev->next = nxt;
+                nxt = curr->next;
+            }
+            
+            // Move the pointers to the next k-group
+            prev = curr;
+            l -= k;
+        }
+        
+        // Return the modified linked list
+        return temp_head->next;
+    }
+};
+
+
+The time complexity of this code is O(N), where N is the number of nodes in the linked list, as each node is visited once. The space complexity is O(1) since the algorithm uses a constant amount of extra space regardless of the input size.
