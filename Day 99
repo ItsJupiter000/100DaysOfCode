@@ -1,0 +1,40 @@
+🚀 Day 99 of #100DaysOfCode Challenge 🚀
+
+🧩 Problem Solved: Leetcode 42. Trapping Rain Water
+🔗 Problem Link: https://lnkd.in/dSiSe3Ey
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        
+        // Arrays to store the maximum height to the left and right of each element
+        int pref[n], suff[n];
+        
+        // Calculate the maximum height to the left for each element
+        pref[0] = height[0];
+        for (int i=1; i<n; i++) {
+            pref[i] = max(pref[i-1], height[i]);
+        }
+        
+        // Calculate the maximum height to the right for each element
+        suff[n-1] = height[n-1];
+        for (int i=n-2; i>=0; i--) {
+            suff[i] = max(suff[i+1], height[i]);
+        }
+        
+        // Calculate the trapped water units for each element and sum them up
+        int water_units = 0;
+        for (int i=0; i<n; i++) {
+            water_units += min(pref[i], suff[i]) - height[i];
+        }
+        
+        // Return the total trapped water units
+        return water_units;
+    }
+};
+
+
+Time Complexity: O(n) : 
+
+The algorithm iterates through the array three times, each time taking O(n) time. Therefore, the overall time complexity is O(n).
